@@ -1,1 +1,1 @@
-include ':sample', ':rxphotoloader'
+include ':sample', ':rxmedialoader'
