@@ -1,11 +1,24 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.yuyakaido.android.rxmedialoader.sample"
-        minSdkVersion 14
+        // Manifest.permission.READ_EXTERNAL_STORAGE requires API 16
+        // http://yuki312.blogspot.jp/2012/10/androidjbreadexternalstorage.html
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -23,4 +36,7 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
 }
