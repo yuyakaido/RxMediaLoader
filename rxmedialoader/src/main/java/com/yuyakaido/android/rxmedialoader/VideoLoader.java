@@ -20,9 +20,9 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
         void onVideoLoaded();
     }
 
-    private Context context;
-    private List<Folder> folders;
-    private VideoLoader.Callback callback;
+    private final Context context;
+    private final List<Folder> folders;
+    private final VideoLoader.Callback callback;
 
     public VideoLoader(
             Context context,
@@ -55,7 +55,7 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
                 MediaStore.Video.Media.DATE_TAKEN};
         private static final String ORDER_BY = MediaStore.Video.Media.DATE_TAKEN + " DESC";
 
-        private List<Folder> folders;
+        private final List<Folder> folders;
 
         public static CursorLoader newInstance(
                 Context context, List<Folder> folders) {

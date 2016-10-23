@@ -20,9 +20,9 @@ public class PhotoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
         void onPhotoLoaded();
     }
 
-    private Context context;
-    private List<Folder> folders;
-    private Callback callback;
+    private final Context context;
+    private final List<Folder> folders;
+    private final Callback callback;
 
     public PhotoLoader(
             Context context,
@@ -55,7 +55,7 @@ public class PhotoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
                 MediaStore.Images.Media.DATE_TAKEN};
         private static final String ORDER_BY = MediaStore.Images.Media.DATE_TAKEN + " DESC";
 
-        private List<Folder> folders;
+        private final List<Folder> folders;
 
         public static CursorLoader newInstance(
                 Context context, List<Folder> folders) {

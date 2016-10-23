@@ -20,8 +20,8 @@ public class FolderLoader implements LoaderManager.LoaderCallbacks<Cursor> {
         void onFolderLoaded(List<Folder> folders);
     }
 
-    private Context context;
-    private Callback callback;
+    private final Context context;
+    private final Callback callback;
 
     public FolderLoader(Context context, LoaderManager loaderManager, Callback callback) {
         this.context = context;
