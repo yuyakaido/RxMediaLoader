@@ -16,6 +16,11 @@ public class RxMediaLoader {
 
     public static Observable<List<Folder>> medias(
             final Context context, final LoaderManager loaderManager) {
+        if (!PermissionUtil.hasReadExternalStoragePermission(context)) {
+            return Observable.error(new NeedPermissionException(
+                    "This operation needs android.permission.READ_EXTERNAL_STORAGE"));
+        }
+
         return Observable.create(
                 new Observable.OnSubscribe<List<Folder>>() {
                     @Override
