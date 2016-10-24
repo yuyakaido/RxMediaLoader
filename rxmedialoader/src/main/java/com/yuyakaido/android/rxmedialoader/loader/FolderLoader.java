@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.loader;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,6 +7,9 @@ import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+
+import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.util.FolderUtil;
 
 import java.util.ArrayList;
 import java.util.List;

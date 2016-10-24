@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.yuyakaido.android.rxmedialoader.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Folder;
 
 /**
  * Created by yuyakaido on 10/22/16.

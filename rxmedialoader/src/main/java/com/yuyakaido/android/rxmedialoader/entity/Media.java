@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.entity;
 
 import android.net.Uri;
 import android.os.Parcel;

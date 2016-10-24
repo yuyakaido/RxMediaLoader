@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;

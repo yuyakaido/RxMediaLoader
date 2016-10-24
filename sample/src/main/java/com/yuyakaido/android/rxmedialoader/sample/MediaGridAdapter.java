@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.yuyakaido.android.rxmedialoader.Media;
+import com.yuyakaido.android.rxmedialoader.entity.Media;
 
 import java.util.List;
 

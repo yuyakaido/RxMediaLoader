@@ -1,7 +1,9 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.util;
 
 import android.database.Cursor;
 import android.provider.MediaStore;
+
+import com.yuyakaido.android.rxmedialoader.entity.Folder;
 
 /**
  * Created by yuyakaido on 10/22/16.

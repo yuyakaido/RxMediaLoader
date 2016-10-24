@@ -3,6 +3,13 @@ package com.yuyakaido.android.rxmedialoader;
 import android.content.Context;
 import android.support.v4.app.LoaderManager;
 
+import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.error.NeedPermissionException;
+import com.yuyakaido.android.rxmedialoader.loader.FolderLoader;
+import com.yuyakaido.android.rxmedialoader.loader.PhotoLoader;
+import com.yuyakaido.android.rxmedialoader.loader.VideoLoader;
+import com.yuyakaido.android.rxmedialoader.util.PermissionUtil;
+
 import java.util.List;
 
 import rx.Observable;

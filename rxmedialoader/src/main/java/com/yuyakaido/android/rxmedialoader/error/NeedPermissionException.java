@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.error;
 
 /**
  * Created by yuyakaido on 10/23/16.

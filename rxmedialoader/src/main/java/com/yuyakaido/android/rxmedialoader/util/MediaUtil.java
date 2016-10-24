@@ -1,9 +1,11 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.util;
 
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+
+import com.yuyakaido.android.rxmedialoader.entity.Media;
 
 /**
  * Created by yuyakaido on 10/22/16.

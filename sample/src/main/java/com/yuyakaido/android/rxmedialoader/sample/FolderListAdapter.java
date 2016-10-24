@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.yuyakaido.android.rxmedialoader.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Folder;
 
 import java.util.ArrayList;
 

@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.yuyakaido.android.rxmedialoader.Folder;
 import com.yuyakaido.android.rxmedialoader.RxMediaLoader;
+import com.yuyakaido.android.rxmedialoader.entity.Folder;
 
 import java.util.List;
 

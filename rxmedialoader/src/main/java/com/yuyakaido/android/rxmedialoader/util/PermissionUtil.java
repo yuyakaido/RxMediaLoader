@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader;
+package com.yuyakaido.android.rxmedialoader.util;
 
 import android.Manifest;
 import android.content.Context;
