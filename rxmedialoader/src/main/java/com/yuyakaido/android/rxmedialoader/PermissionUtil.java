@@ -11,6 +11,8 @@ import android.support.v4.content.PermissionChecker;
  */
 public class PermissionUtil {
 
+    private PermissionUtil() {}
+
     public static boolean hasReadExternalStoragePermission(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int result = PermissionChecker.checkSelfPermission(

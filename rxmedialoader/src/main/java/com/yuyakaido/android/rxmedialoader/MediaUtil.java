@@ -10,6 +10,8 @@ import android.provider.MediaStore;
  */
 public class MediaUtil {
 
+    private MediaUtil() {}
+
     public static Media photo(Cursor cursor) {
         Media media = new Media();
         media.id = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media._ID));

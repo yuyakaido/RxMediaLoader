@@ -8,6 +8,8 @@ import android.provider.MediaStore;
  */
 public class FolderUtil {
 
+    private FolderUtil() {}
+
     public static Folder valueOf(Cursor cursor) {
         Folder folder = new Folder();
         folder.id = cursor.getString(cursor.getColumnIndex(

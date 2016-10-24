@@ -14,6 +14,8 @@ import rx.functions.Func1;
  */
 public class RxMediaLoader {
 
+    private RxMediaLoader() {}
+
     public static Observable<List<Folder>> medias(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
