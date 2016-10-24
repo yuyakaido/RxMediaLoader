@@ -20,6 +20,8 @@
 
         <activity android:name=".MediaGridActivity"/>
 
+        <activity android:name=".MediaPagerActivity"/>
+
     </application>
 
 </manifest>
