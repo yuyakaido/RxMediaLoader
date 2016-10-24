@@ -16,10 +16,12 @@ import java.util.List;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 import rx.Subscriber;
+import rx.subscriptions.CompositeSubscription;
 
 @RuntimePermissions
 public class MainActivity extends AppCompatActivity {
 
+    private CompositeSubscription subscriptions = new CompositeSubscription();
     private FolderListAdapter adapter;
 
     @Override
@@ -42,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        subscriptions.unsubscribe();
+        super.onDestroy();
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     public void load() {
-        RxMediaLoader.medias(this, getSupportLoaderManager())
+        subscriptions.add(RxMediaLoader.medias(this, getSupportLoaderManager())
                 .subscribe(new Subscriber<List<Folder>>() {
                     @Override
                     public void onCompleted() {}
@@ -62,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         adapter.addAll(folders);
                         adapter.notifyDataSetChanged();
                     }
-                });
+                }));
     }
 
 }
