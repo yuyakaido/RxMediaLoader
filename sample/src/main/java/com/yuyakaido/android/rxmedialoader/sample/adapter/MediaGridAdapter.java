@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader.sample;
+package com.yuyakaido.android.rxmedialoader.sample.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,20 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Media;
+import com.yuyakaido.android.rxmedialoader.sample.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yuyakaido on 10/22/16.
  */
-public class FolderListAdapter extends ArrayAdapter<Folder> {
+public class MediaGridAdapter extends ArrayAdapter<Media> {
 
-    public FolderListAdapter(Context context) {
-        super(context, 0, new ArrayList<Folder>());
+    public MediaGridAdapter(Context context, List<Media> medias) {
+        super(context, 0, medias);
     }
 
     @NonNull
@@ -28,28 +28,25 @@ public class FolderListAdapter extends ArrayAdapter<Folder> {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = View.inflate(getContext(), R.layout.item_folter_list, null);
+            convertView = View.inflate(getContext(), R.layout.item_media_grid, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Folder folder = getItem(position);
+        Media media = getItem(position);
 
-        Glide.with(getContext()).load(folder.cover.uri).into(holder.image);
-        holder.name.setText(folder.name);
+        Glide.with(getContext()).load(media.uri).into(holder.image);
 
         return convertView;
     }
 
     private static class ViewHolder {
         public ImageView image;
-        public TextView name;
 
         public ViewHolder(View view) {
-            this.image = (ImageView) view.findViewById(R.id.item_folder_list_image);
-            this.name = (TextView) view.findViewById(R.id.item_folder_list_name);
+            this.image = (ImageView) view.findViewById(R.id.item_media_grid_image);
         }
     }
 

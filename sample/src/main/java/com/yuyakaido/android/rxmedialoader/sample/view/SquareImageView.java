@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader.sample;
+package com.yuyakaido.android.rxmedialoader.sample.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

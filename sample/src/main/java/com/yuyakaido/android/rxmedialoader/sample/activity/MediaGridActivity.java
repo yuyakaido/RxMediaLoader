@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader.sample;
+package com.yuyakaido.android.rxmedialoader.sample.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.sample.R;
+import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaGridAdapter;
 
 /**
  * Created by yuyakaido on 10/22/16.

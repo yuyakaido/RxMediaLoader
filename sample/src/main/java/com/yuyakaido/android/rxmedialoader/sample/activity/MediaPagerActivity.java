@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader.sample;
+package com.yuyakaido.android.rxmedialoader.sample.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.sample.R;
+import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaPagerAdapter;
 
 /**
  * Created by yuyakaido on 10/24/16.

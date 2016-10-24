@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader.sample;
+package com.yuyakaido.android.rxmedialoader.sample.activity;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import com.yuyakaido.android.rxmedialoader.RxMediaLoader;
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.sample.R;
+import com.yuyakaido.android.rxmedialoader.sample.adapter.FolderListAdapter;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.yuyakaido.android.rxmedialoader.sample;
+package com.yuyakaido.android.rxmedialoader.sample.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.yuyakaido.android.rxmedialoader.entity.Media;
+import com.yuyakaido.android.rxmedialoader.sample.R;
 
 import java.util.List;
 

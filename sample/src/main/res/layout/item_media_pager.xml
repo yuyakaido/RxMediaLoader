@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.yuyakaido.android.rxmedialoader.sample.SquareImageView
+    <com.yuyakaido.android.rxmedialoader.sample.view.SquareImageView
         android:id="@+id/item_media_pager_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
