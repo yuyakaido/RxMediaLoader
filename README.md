@@ -1,6 +1,7 @@
 # RxMediaLoader
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Download](https://api.bintray.com/packages/yuyakaido/maven/RxMediaLoader/images/download.svg)](https://bintray.com/yuyakaido/maven/RxMediaLoader/_latestVersion)
 
 Load local media with RxJava for Android
 
