@@ -82,6 +82,14 @@ RxMediaLoader.videos(this, getSupportLoaderManager())
         });
 ```
 
+## Install
+
+- Latest version is ![Download](https://api.bintray.com/packages/yuyakaido/maven/RxMediaLoader/images/download.svg)
+
+```
+compile 'com.yuyakaido.android:rx-media-loader:${LatestVersion}'
+```
+
 # License
 
 ```
