@@ -4,12 +4,15 @@ import android.content.Context;
 import android.support.v4.app.LoaderManager;
 
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Media;
 import com.yuyakaido.android.rxmedialoader.error.NeedPermissionException;
 import com.yuyakaido.android.rxmedialoader.loader.FolderLoader;
 import com.yuyakaido.android.rxmedialoader.loader.PhotoLoader;
 import com.yuyakaido.android.rxmedialoader.loader.VideoLoader;
 import com.yuyakaido.android.rxmedialoader.util.PermissionUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import rx.Observable;
@@ -30,16 +33,62 @@ public class RxMediaLoader {
                 .flatMap(videosFunc(context, loaderManager));
     }
 
+    public static Observable<List<Media>> medias(
+            final Context context,
+            final LoaderManager loaderManager,
+            final Folder folder) {
+        folder.medias = new ArrayList<>();
+        return Observable.just(Arrays.asList(folder))
+                .flatMap(photosFunc(context, loaderManager))
+                .flatMap(videosFunc(context, loaderManager))
+                .map(new Func1<List<Folder>, List<Media>>() {
+                    @Override
+                    public List<Media> call(List<Folder> folders) {
+                        return folders.get(0).medias;
+                    }
+                });
+    }
+
     public static Observable<List<Folder>> photos(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
                 .flatMap(photosFunc(context, loaderManager));
     }
 
+    public static Observable<List<Media>> photos(
+            final Context context,
+            final LoaderManager loaderManager,
+            final Folder folder) {
+        folder.medias = new ArrayList<>();
+        return Observable.just(Arrays.asList(folder))
+                .flatMap(photosFunc(context, loaderManager))
+                .map(new Func1<List<Folder>, List<Media>>() {
+                    @Override
+                    public List<Media> call(List<Folder> folders) {
+                        return folders.get(0).medias;
+                    }
+                });
+    }
+
     public static Observable<List<Folder>> videos(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
                 .flatMap(videosFunc(context, loaderManager));
+    }
+
+    public static Observable<List<Media>> videos(
+            final Context context,
+            final LoaderManager loaderManager,
+            final Folder folder) {
+        folder.medias = new ArrayList<>();
+        return Observable.just(Arrays.asList(folder))
+                .flatMap(videosFunc(context, loaderManager))
+                .map(new Func1<List<Folder>, List<Media>>() {
+                    @Override
+                    public List<Media> call(List<Folder> folders) {
+                        return folders.get(0).medias;
+                    }
+                });
     }
 
     private static Observable<List<Folder>> folders(
