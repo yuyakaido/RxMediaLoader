@@ -94,10 +94,10 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
                     String id = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_ID));
 
                     Album album = getAlbum(id);
-                    album.medias.add(media);
-                    if (album.medias.size() == 1) {
+                    if (album.medias.isEmpty()) {
                         album.cover = media;
                     }
+                    album.medias.add(media);
                 } while (cursor.moveToNext());
             }
 
