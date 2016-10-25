@@ -3,8 +3,8 @@ package com.yuyakaido.android.rxmedialoader;
 import android.content.Context;
 import android.support.v4.app.LoaderManager;
 
+import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
-import com.yuyakaido.android.rxmedialoader.entity.Media;
 import com.yuyakaido.android.rxmedialoader.error.NeedPermissionException;
 import com.yuyakaido.android.rxmedialoader.loader.FolderLoader;
 import com.yuyakaido.android.rxmedialoader.loader.PhotoLoader;
@@ -26,67 +26,70 @@ public class RxMediaLoader {
 
     private RxMediaLoader() {}
 
-    public static Observable<List<Folder>> medias(
+    public static Observable<List<Album>> medias(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
+                .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager))
                 .flatMap(videosFunc(context, loaderManager));
     }
 
-    public static Observable<List<Media>> medias(
+    public static Observable<Album> medias(
             final Context context,
             final LoaderManager loaderManager,
             final Folder folder) {
-        folder.medias = new ArrayList<>();
         return Observable.just(Arrays.asList(folder))
+                .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager))
                 .flatMap(videosFunc(context, loaderManager))
-                .map(new Func1<List<Folder>, List<Media>>() {
+                .map(new Func1<List<Album>, Album>() {
                     @Override
-                    public List<Media> call(List<Folder> folders) {
-                        return folders.get(0).medias;
+                    public Album call(List<Album> albums) {
+                        return albums.get(0);
                     }
                 });
     }
 
-    public static Observable<List<Folder>> photos(
+    public static Observable<List<Album>> photos(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
+                .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager));
     }
 
-    public static Observable<List<Media>> photos(
+    public static Observable<Album> photos(
             final Context context,
             final LoaderManager loaderManager,
             final Folder folder) {
-        folder.medias = new ArrayList<>();
         return Observable.just(Arrays.asList(folder))
+                .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager))
-                .map(new Func1<List<Folder>, List<Media>>() {
+                .map(new Func1<List<Album>, Album>() {
                     @Override
-                    public List<Media> call(List<Folder> folders) {
-                        return folders.get(0).medias;
+                    public Album call(List<Album> albums) {
+                        return albums.get(0);
                     }
                 });
     }
 
-    public static Observable<List<Folder>> videos(
+    public static Observable<List<Album>> videos(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
+                .map(toAlbums())
                 .flatMap(videosFunc(context, loaderManager));
     }
 
-    public static Observable<List<Media>> videos(
+    public static Observable<Album> videos(
             final Context context,
             final LoaderManager loaderManager,
             final Folder folder) {
-        folder.medias = new ArrayList<>();
         return Observable.just(Arrays.asList(folder))
+                .map(toAlbums())
                 .flatMap(videosFunc(context, loaderManager))
-                .map(new Func1<List<Folder>, List<Media>>() {
+                .map(new Func1<List<Album>, Album>() {
                     @Override
-                    public List<Media> call(List<Folder> folders) {
-                        return folders.get(0).medias;
+                    public Album call(List<Album> albums) {
+                        return albums.get(0);
                     }
                 });
     }
@@ -112,18 +115,31 @@ public class RxMediaLoader {
         });
     }
 
-    private static Func1<List<Folder>, Observable<List<Folder>>> photosFunc(
-            final Context context, final LoaderManager loaderManager) {
-        return new Func1<List<Folder>, Observable<List<Folder>>>() {
+    private static Func1<List<Folder>, List<Album>> toAlbums() {
+        return new Func1<List<Folder>, List<Album>>() {
             @Override
-            public Observable<List<Folder>> call(final List<Folder> folders) {
-                return Observable.create(new Observable.OnSubscribe<List<Folder>>() {
+            public List<Album> call(List<Folder> folders) {
+                List<Album> albums = new ArrayList<>();
+                for (Folder folder : folders) {
+                    albums.add(new Album(folder));
+                }
+                return albums;
+            }
+        };
+    }
+
+    private static Func1<List<Album>, Observable<List<Album>>> photosFunc(
+            final Context context, final LoaderManager loaderManager) {
+        return new Func1<List<Album>, Observable<List<Album>>>() {
+            @Override
+            public Observable<List<Album>> call(final List<Album> albums) {
+                return Observable.create(new Observable.OnSubscribe<List<Album>>() {
                     @Override
-                    public void call(final Subscriber<? super List<Folder>> subscriber) {
-                        new PhotoLoader(context, loaderManager, folders, new PhotoLoader.Callback() {
+                    public void call(final Subscriber<? super List<Album>> subscriber) {
+                        new PhotoLoader(context, loaderManager, albums, new PhotoLoader.Callback() {
                             @Override
-                            public void onPhotoLoaded() {
-                                subscriber.onNext(folders);
+                            public void onPhotoLoaded(List<Album> albums) {
+                                subscriber.onNext(albums);
                                 subscriber.onCompleted();
                             }
                         });
@@ -133,18 +149,18 @@ public class RxMediaLoader {
         };
     }
 
-    private static Func1<List<Folder>, Observable<List<Folder>>> videosFunc(
+    private static Func1<List<Album>, Observable<List<Album>>> videosFunc(
             final Context context, final LoaderManager loaderManager) {
-        return new Func1<List<Folder>, Observable<List<Folder>>>() {
+        return new Func1<List<Album>, Observable<List<Album>>>() {
             @Override
-            public Observable<List<Folder>> call(final List<Folder> folders) {
-                return Observable.create(new Observable.OnSubscribe<List<Folder>>() {
+            public Observable<List<Album>> call(final List<Album> albums) {
+                return Observable.create(new Observable.OnSubscribe<List<Album>>() {
                     @Override
-                    public void call(final Subscriber<? super List<Folder>> subscriber) {
-                        new VideoLoader(context, loaderManager, folders, new VideoLoader.Callback() {
+                    public void call(final Subscriber<? super List<Album>> subscriber) {
+                        new VideoLoader(context, loaderManager, albums, new VideoLoader.Callback() {
                             @Override
-                            public void onVideoLoaded() {
-                                subscriber.onNext(folders);
+                            public void onVideoLoaded(List<Album> albums) {
+                                subscriber.onNext(albums);
                                 subscriber.onCompleted();
                             }
                         });

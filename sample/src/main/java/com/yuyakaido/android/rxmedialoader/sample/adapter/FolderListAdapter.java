@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.sample.R;
 
 import java.util.ArrayList;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 /**
  * Created by yuyakaido on 10/22/16.
  */
-public class FolderListAdapter extends ArrayAdapter<Folder> {
+public class FolderListAdapter extends ArrayAdapter<Album> {
 
     public FolderListAdapter(Context context) {
-        super(context, 0, new ArrayList<Folder>());
+        super(context, 0, new ArrayList<Album>());
     }
 
     @NonNull
@@ -36,10 +36,10 @@ public class FolderListAdapter extends ArrayAdapter<Folder> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Folder folder = getItem(position);
+        Album album = getItem(position);
 
-        Glide.with(getContext()).load(folder.cover.uri).into(holder.image);
-        holder.name.setText(folder.name);
+        Glide.with(getContext()).load(album.cover.uri).into(holder.image);
+        holder.name.setText(album.folder.name);
 
         return convertView;
     }

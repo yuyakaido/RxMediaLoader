@@ -9,7 +9,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
-import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.entity.Media;
 import com.yuyakaido.android.rxmedialoader.util.MediaUtil;
 
@@ -21,27 +21,27 @@ import java.util.List;
 public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public interface Callback {
-        void onVideoLoaded();
+        void onVideoLoaded(List<Album> albums);
     }
 
     private final Context context;
-    private final List<Folder> folders;
+    private final List<Album> albums;
     private final VideoLoader.Callback callback;
 
     public VideoLoader(
             Context context,
             LoaderManager loaderManager,
-            List<Folder> folders,
+            List<Album> albums,
             VideoLoader.Callback callback) {
         this.context = context;
-        this.folders = folders;
+        this.albums = albums;
         this.callback = callback;
         loaderManager.restartLoader(0, null, this);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return VideoLoader.InternalVideoLoader.newInstance(context, folders);
+        return VideoLoader.InternalVideoLoader.newInstance(context, albums);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        callback.onVideoLoaded();
+        callback.onVideoLoaded(albums);
     }
 
     private static class InternalVideoLoader extends CursorLoader {
@@ -59,13 +59,13 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
                 MediaStore.Video.Media.DATE_TAKEN};
         private static final String ORDER_BY = MediaStore.Video.Media.DATE_TAKEN + " DESC";
 
-        private final List<Folder> folders;
+        private final List<Album> albums;
 
         public static CursorLoader newInstance(
-                Context context, List<Folder> folders) {
+                Context context, List<Album> albums) {
             return new VideoLoader.InternalVideoLoader(
                     context,
-                    folders,
+                    albums,
                     MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
                     PROJECTION,
                     null,
@@ -75,14 +75,14 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
         private InternalVideoLoader(
                 Context context,
-                List<Folder> folders,
+                List<Album> albums,
                 Uri uri,
                 String[] projection,
                 String selection,
                 String[] selectionArgs,
                 String sortOrder) {
             super(context, uri, projection, selection, selectionArgs, sortOrder);
-            this.folders = folders;
+            this.albums = albums;
         }
 
         @Override
@@ -92,20 +92,22 @@ public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
                 do {
                     Media media = MediaUtil.video(cursor);
                     String id = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_ID));
-                    Folder folder = getFolder(folders, id);
-                    folder.medias.add(media);
-                    if (folder.medias.size() == 1) {
-                        folder.cover = media;
+
+                    Album album = getAlbum(id);
+                    album.medias.add(media);
+                    if (album.medias.size() == 1) {
+                        album.cover = media;
                     }
                 } while (cursor.moveToNext());
             }
+
             return cursor;
         }
 
-        private Folder getFolder(List<Folder> folders, String id) {
-            for (Folder folder : folders) {
-                if (folder.id.equals(id)) {
-                    return folder;
+        private Album getAlbum(String id) {
+            for (Album album : albums) {
+                if (album.folder.id.equals(id)) {
+                    return album;
                 }
             }
             return null;

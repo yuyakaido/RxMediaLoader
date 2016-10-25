@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.sample.R;
 import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaGridAdapter;
 
@@ -19,11 +19,11 @@ import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaGridAdapter;
  */
 public class MediaGridActivity extends AppCompatActivity {
 
-    private static final String ARGS_FOLDER = "ARGS_FOLDER";
+    private static final String ARGS_ALBUM = "ARGS_ALBUM";
 
-    public static Intent createIntent(Context context, Folder folder) {
+    public static Intent createIntent(Context context, Album album) {
         Intent intent = new Intent(context, MediaGridActivity.class);
-        intent.putExtra(ARGS_FOLDER, folder);
+        intent.putExtra(ARGS_ALBUM, album);
         return intent;
     }
 
@@ -32,19 +32,19 @@ public class MediaGridActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_grid);
 
-        final Folder folder = getIntent().getParcelableExtra(ARGS_FOLDER);
+        final Album album = getIntent().getParcelableExtra(ARGS_ALBUM);
 
-        setTitle(folder.name);
+        setTitle(album.folder.name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        MediaGridAdapter adapter = new MediaGridAdapter(this, folder.medias);
+        MediaGridAdapter adapter = new MediaGridAdapter(this, album.medias);
         GridView gridView = (GridView) findViewById(R.id.activity_media_grid_grid_view);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(MediaPagerActivity.createIntent(
-                        MediaGridActivity.this, folder, i));
+                        MediaGridActivity.this, album, i));
             }
         });
     }

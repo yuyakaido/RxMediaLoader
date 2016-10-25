@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.yuyakaido.android.rxmedialoader.RxMediaLoader;
-import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.sample.R;
 import com.yuyakaido.android.rxmedialoader.sample.adapter.FolderListAdapter;
 
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Folder folder = adapter.getItem(i);
-                startActivity(MediaGridActivity.createIntent(MainActivity.this, folder));
+                Album album = adapter.getItem(i);
+                startActivity(MediaGridActivity.createIntent(MainActivity.this, album));
             }
         });
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     public void load() {
         subscriptions.add(RxMediaLoader.medias(this, getSupportLoaderManager())
-                .subscribe(new Subscriber<List<Folder>>() {
+                .subscribe(new Subscriber<List<Album>>() {
                     @Override
                     public void onCompleted() {}
 
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(Throwable e) {}
 
                     @Override
-                    public void onNext(List<Folder> folders) {
-                        adapter.addAll(folders);
+                    public void onNext(List<Album> albums) {
+                        adapter.addAll(albums);
                         adapter.notifyDataSetChanged();
                     }
                 }));

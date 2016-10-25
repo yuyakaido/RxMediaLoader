@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.sample.R;
 import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaPagerAdapter;
 
@@ -17,13 +17,13 @@ import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaPagerAdapter;
  */
 public class MediaPagerActivity extends AppCompatActivity {
 
-    private static final String ARGS_FOLDER = "ARGS_FOLDER";
+    private static final String ARGS_ALBUM = "ARGS_ALBUM";
     private static final String ARGS_POSITION = "ARGS_POSITION";
     private static final int DEFAULT_POSITION = 0;
 
-    public static Intent createIntent(Context context, Folder folder, int position) {
+    public static Intent createIntent(Context context, Album album, int position) {
         Intent intent = new Intent(context, MediaPagerActivity.class);
-        intent.putExtra(ARGS_FOLDER, folder);
+        intent.putExtra(ARGS_ALBUM, album);
         intent.putExtra(ARGS_POSITION, position);
         return intent;
     }
@@ -34,14 +34,14 @@ public class MediaPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_media_pager);
 
         Intent intent = getIntent();
-        Folder folder = intent.getParcelableExtra(ARGS_FOLDER);
+        Album album = intent.getParcelableExtra(ARGS_ALBUM);
         int position = intent.getIntExtra(ARGS_POSITION, DEFAULT_POSITION);
 
-        setTitle(folder.name);
+        setTitle(album.folder.name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_media_pager_view_pager);
-        viewPager.setAdapter(new MediaPagerAdapter(this, folder.medias));
+        viewPager.setAdapter(new MediaPagerAdapter(this, album.medias));
         viewPager.setCurrentItem(position);
     }
 
