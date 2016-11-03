@@ -110,7 +110,7 @@ RxMediaLoader.medias(this, getSupportLoaderManager(), folder)
         });
 ```
 
-## Install
+# Installation
 
 Latest version is ![Download](https://api.bintray.com/packages/yuyakaido/maven/RxMediaLoader/images/download.svg)
 
