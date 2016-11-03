@@ -15,14 +15,20 @@ Load local media with RxJava for Android
 
 # Usage
 
+## Album
+
+Album class represents a collection including photo and video.
+
+- folder(Folder): Folder of this album
+- cover(Media): Cover media of this album
+- medias(List<Media>): All medias of this album
+
 ## Folder
 
 Folder class represents a directory such as Camera.
 
 - id(String): Internal identity
 - name(String): Directory name for display
-- cover(Media): Cover media in this folder
-- medias(List<Media>): All medias in this folder
 
 ## Media
 
@@ -36,7 +42,7 @@ Media class represents a photo or video.
 
 ```java
 RxMediaLoader.medias(this, getSupportLoaderManager())
-        .subscribe(new Subscriber<List<Folder>>() {
+        .subscribe(new Subscriber<List<Album>>() {
             @Override
             public void onCompleted() {}
 
@@ -44,7 +50,7 @@ RxMediaLoader.medias(this, getSupportLoaderManager())
             public void onError(Throwable e) {}
 
             @Override
-            public void onNext(List<Folder> folders) {
+            public void onNext(List<Album> albums) {
                 // Write your awesome code!
             }
         });
@@ -54,7 +60,7 @@ RxMediaLoader.medias(this, getSupportLoaderManager())
 
 ```java
 RxMediaLoader.photos(this, getSupportLoaderManager())
-        .subscribe(new Subscriber<List<Folder>>() {
+        .subscribe(new Subscriber<List<Album>>() {
             @Override
             public void onCompleted() {}
 
@@ -62,7 +68,7 @@ RxMediaLoader.photos(this, getSupportLoaderManager())
             public void onError(Throwable e) {}
 
             @Override
-            public void onNext(List<Folder> folders) {
+            public void onNext(List<Album> albums) {
                 // Write your awesome code!
             }
         });
@@ -72,7 +78,7 @@ RxMediaLoader.photos(this, getSupportLoaderManager())
 
 ```java
 RxMediaLoader.videos(this, getSupportLoaderManager())
-        .subscribe(new Subscriber<List<Folder>>() {
+        .subscribe(new Subscriber<List<Album>>() {
             @Override
             public void onCompleted() {}
 
@@ -80,7 +86,25 @@ RxMediaLoader.videos(this, getSupportLoaderManager())
             public void onError(Throwable e) {}
 
             @Override
-            public void onNext(List<Folder> folders) {
+            public void onNext(List<Album> albums) {
+                // Write your awesome code!
+            }
+        });
+```
+
+## Load medias in specific folder
+
+```java
+RxMediaLoader.medias(this, getSupportLoaderManager(), folder)
+        .subscribe(new Subscriber<List<Album>>() {
+            @Override
+            public void onCompleted() {}
+
+            @Override
+            public void onError(Throwable e) {}
+
+            @Override
+            public void onNext(List<Album> albums) {
                 // Write your awesome code!
             }
         });
