@@ -5,6 +5,10 @@
 
 Load local media with RxJava for Android
 
+# Sample
+
+![sample](https://github.com/yuyakaido/RxMediaLoader/blob/master/sample.gif)
+
 # Requirement
 
 - Android 4.0+ (API 14+)
