@@ -9,7 +9,8 @@
         android:id="@+id/activity_media_grid_grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="4"
+        android:gravity="center"
+        android:numColumns="3"
         android:padding="4dp"
         android:verticalSpacing="4dp"
         android:horizontalSpacing="4dp">

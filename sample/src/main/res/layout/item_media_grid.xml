@@ -7,8 +7,8 @@
 
     <com.yuyakaido.android.rxmedialoader.sample.view.SquareImageView
         android:id="@+id/item_media_grid_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
 </RelativeLayout>
