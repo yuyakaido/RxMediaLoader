@@ -7,11 +7,11 @@ Load local media with RxJava for Android
 
 # Sample
 
-![sample](https://github.com/yuyakaido/RxMediaLoader/blob/master/sample.gif)
+![Sample](https://github.com/yuyakaido/RxMediaLoader/blob/master/sample.gif)
 
 # Requirement
 
-- Android 4.0+ (API 14+)
+Android 4.0+ (API 14+)
 
 # Usage
 
@@ -112,9 +112,9 @@ RxMediaLoader.medias(this, getSupportLoaderManager(), folder)
 
 ## Install
 
-- Latest version is ![Download](https://api.bintray.com/packages/yuyakaido/maven/RxMediaLoader/images/download.svg)
+Latest version is ![Download](https://api.bintray.com/packages/yuyakaido/maven/RxMediaLoader/images/download.svg)
 
-```
+```groovy
 compile 'com.yuyakaido.android:rx-media-loader:${LatestVersion}'
 ```
 
