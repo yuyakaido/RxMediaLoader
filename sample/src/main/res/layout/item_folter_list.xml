@@ -9,15 +9,16 @@
 
     <ImageView
         android:id="@+id/item_folder_list_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/item_folder_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_marginLeft="24dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="20sp"/>
 
 </LinearLayout>
