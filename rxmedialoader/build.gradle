@@ -31,7 +31,7 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:25.0.0'
-    compile 'io.reactivex:rxjava:1.2.1'
+    compile 'io.reactivex:rxjava:1.2.2'
 }
 
 publish {
