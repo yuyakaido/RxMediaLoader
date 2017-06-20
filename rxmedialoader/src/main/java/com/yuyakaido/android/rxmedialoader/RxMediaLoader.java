@@ -21,9 +21,6 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class RxMediaLoader {
 
     private RxMediaLoader() {}

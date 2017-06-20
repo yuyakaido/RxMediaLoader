@@ -7,9 +7,6 @@ import android.provider.MediaStore;
 
 import com.yuyakaido.android.rxmedialoader.entity.Media;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class MediaUtil {
 
     private MediaUtil() {}

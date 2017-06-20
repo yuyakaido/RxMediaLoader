@@ -15,9 +15,6 @@ import com.yuyakaido.android.rxmedialoader.util.MediaUtil;
 
 import java.util.List;
 
-/**
- * Created by yuyakaido on 10/23/16.
- */
 public class VideoLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public interface Callback {

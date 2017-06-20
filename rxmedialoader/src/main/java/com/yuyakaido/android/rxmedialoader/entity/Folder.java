@@ -3,9 +3,6 @@ package com.yuyakaido.android.rxmedialoader.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class Folder implements Parcelable {
 
     public static final Creator<Folder> CREATOR = new Creator<Folder>() {

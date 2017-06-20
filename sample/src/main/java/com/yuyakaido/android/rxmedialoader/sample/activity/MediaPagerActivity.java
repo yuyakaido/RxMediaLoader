@@ -12,9 +12,6 @@ import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.sample.R;
 import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaPagerAdapter;
 
-/**
- * Created by yuyakaido on 10/24/16.
- */
 public class MediaPagerActivity extends AppCompatActivity {
 
     private static final String ARGS_ALBUM = "ARGS_ALBUM";

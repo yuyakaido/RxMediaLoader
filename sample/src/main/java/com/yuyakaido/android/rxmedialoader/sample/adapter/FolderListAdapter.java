@@ -14,9 +14,6 @@ import com.yuyakaido.android.rxmedialoader.sample.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class FolderListAdapter extends ArrayAdapter<Album> {
 
     public FolderListAdapter(Context context) {

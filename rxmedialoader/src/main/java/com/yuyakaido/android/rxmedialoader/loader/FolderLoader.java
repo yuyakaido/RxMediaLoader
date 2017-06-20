@@ -14,9 +14,6 @@ import com.yuyakaido.android.rxmedialoader.util.FolderUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class FolderLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public interface Callback {

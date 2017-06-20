@@ -6,9 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.content.PermissionChecker;
 
-/**
- * Created by yuyakaido on 10/23/16.
- */
 public class PermissionUtil {
 
     private PermissionUtil() {}

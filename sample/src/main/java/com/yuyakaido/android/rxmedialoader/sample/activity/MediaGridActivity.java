@@ -14,9 +14,6 @@ import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.sample.R;
 import com.yuyakaido.android.rxmedialoader.sample.adapter.MediaGridAdapter;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class MediaGridActivity extends AppCompatActivity {
 
     private static final String ARGS_ALBUM = "ARGS_ALBUM";

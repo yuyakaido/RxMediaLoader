@@ -6,9 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yuyakaido on 10/25/16.
- */
 public class Album implements Parcelable {
 
     public static final Creator<Album> CREATOR = new Creator<Album>() {

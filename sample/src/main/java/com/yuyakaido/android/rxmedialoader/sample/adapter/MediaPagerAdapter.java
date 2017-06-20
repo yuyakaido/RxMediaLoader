@@ -12,9 +12,6 @@ import com.yuyakaido.android.rxmedialoader.sample.R;
 
 import java.util.List;
 
-/**
- * Created by yuyakaido on 10/24/16.
- */
 public class MediaPagerAdapter extends PagerAdapter {
 
     private Context context;

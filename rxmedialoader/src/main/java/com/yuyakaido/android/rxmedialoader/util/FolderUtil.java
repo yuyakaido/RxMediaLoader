@@ -5,9 +5,6 @@ import android.provider.MediaStore;
 
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class FolderUtil {
 
     private FolderUtil() {}

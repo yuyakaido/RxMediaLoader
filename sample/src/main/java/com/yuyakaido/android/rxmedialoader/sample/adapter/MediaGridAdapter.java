@@ -13,9 +13,6 @@ import com.yuyakaido.android.rxmedialoader.sample.R;
 
 import java.util.List;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class MediaGridAdapter extends ArrayAdapter<Media> {
 
     public MediaGridAdapter(Context context, List<Media> medias) {

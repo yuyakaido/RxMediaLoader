@@ -4,9 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by yuyakaido on 10/22/16.
- */
 public class Media implements Parcelable {
 
     public static final Creator<Media> CREATOR = new Creator<Media>() {
