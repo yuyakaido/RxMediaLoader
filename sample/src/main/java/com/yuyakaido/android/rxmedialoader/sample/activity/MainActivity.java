@@ -15,15 +15,15 @@ import com.yuyakaido.android.rxmedialoader.sample.adapter.FolderListAdapter;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.BiConsumer;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
-import rx.Subscriber;
-import rx.subscriptions.CompositeSubscription;
 
 @RuntimePermissions
 public class MainActivity extends AppCompatActivity {
 
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private CompositeDisposable disposables = new CompositeDisposable();
     private FolderListAdapter adapter;
 
     @Override
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        subscriptions.unsubscribe();
+        disposables.dispose();
         super.onDestroy();
     }
 
@@ -59,16 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     public void load() {
-        subscriptions.add(RxMediaLoader.medias(this, getSupportLoaderManager())
-                .subscribe(new Subscriber<List<Album>>() {
+        disposables.add(RxMediaLoader.medias(this, getSupportLoaderManager())
+                .subscribe(new BiConsumer<List<Album>, Throwable>() {
                     @Override
-                    public void onCompleted() {}
-
-                    @Override
-                    public void onError(Throwable e) {}
-
-                    @Override
-                    public void onNext(List<Album> albums) {
+                    public void accept(List<Album> albums, Throwable throwable) throws Exception {
                         adapter.addAll(albums);
                         adapter.notifyDataSetChanged();
                     }

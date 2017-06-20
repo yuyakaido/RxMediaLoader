@@ -15,9 +15,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * Created by yuyakaido on 10/22/16.
@@ -26,7 +28,7 @@ public class RxMediaLoader {
 
     private RxMediaLoader() {}
 
-    public static Observable<List<Album>> medias(
+    public static Single<List<Album>> medias(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
                 .map(toAlbums())
@@ -34,91 +36,90 @@ public class RxMediaLoader {
                 .flatMap(videosFunc(context, loaderManager));
     }
 
-    public static Observable<Album> medias(
+    public static Single<Album> medias(
             final Context context,
             final LoaderManager loaderManager,
             final Folder folder) {
-        return Observable.just(Arrays.asList(folder))
+        return Single.just(Arrays.asList(folder))
                 .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager))
                 .flatMap(videosFunc(context, loaderManager))
-                .map(new Func1<List<Album>, Album>() {
+                .map(new Function<List<Album>, Album>() {
                     @Override
-                    public Album call(List<Album> albums) {
+                    public Album apply(@NonNull List<Album> albums) throws Exception {
                         return albums.get(0);
                     }
                 });
     }
 
-    public static Observable<List<Album>> photos(
+    public static Single<List<Album>> photos(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
                 .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager));
     }
 
-    public static Observable<Album> photos(
+    public static Single<Album> photos(
             final Context context,
             final LoaderManager loaderManager,
             final Folder folder) {
-        return Observable.just(Arrays.asList(folder))
+        return Single.just(Arrays.asList(folder))
                 .map(toAlbums())
                 .flatMap(photosFunc(context, loaderManager))
-                .map(new Func1<List<Album>, Album>() {
+                .map(new Function<List<Album>, Album>() {
                     @Override
-                    public Album call(List<Album> albums) {
+                    public Album apply(@NonNull List<Album> albums) throws Exception {
                         return albums.get(0);
                     }
                 });
     }
 
-    public static Observable<List<Album>> videos(
+    public static Single<List<Album>> videos(
             final Context context, final LoaderManager loaderManager) {
         return folders(context, loaderManager)
                 .map(toAlbums())
                 .flatMap(videosFunc(context, loaderManager));
     }
 
-    public static Observable<Album> videos(
+    public static Single<Album> videos(
             final Context context,
             final LoaderManager loaderManager,
             final Folder folder) {
-        return Observable.just(Arrays.asList(folder))
+        return Single.just(Arrays.asList(folder))
                 .map(toAlbums())
                 .flatMap(videosFunc(context, loaderManager))
-                .map(new Func1<List<Album>, Album>() {
+                .map(new Function<List<Album>, Album>() {
                     @Override
-                    public Album call(List<Album> albums) {
+                    public Album apply(@NonNull List<Album> albums) throws Exception {
                         return albums.get(0);
                     }
                 });
     }
 
-    private static Observable<List<Folder>> folders(
+    private static Single<List<Folder>> folders(
             final Context context, final LoaderManager loaderManager) {
         if (!PermissionUtil.hasReadExternalStoragePermission(context)) {
-            return Observable.error(new NeedPermissionException(
+            return Single.error(new NeedPermissionException(
                     "This operation needs android.permission.READ_EXTERNAL_STORAGE"));
         }
 
-        return Observable.create(new Observable.OnSubscribe<List<Folder>>() {
+        return Single.create(new SingleOnSubscribe<List<Folder>>() {
             @Override
-            public void call(final Subscriber<? super List<Folder>> subscriber) {
+            public void subscribe(@NonNull final SingleEmitter<List<Folder>> emitter) throws Exception {
                 new FolderLoader(context, loaderManager, new FolderLoader.Callback() {
                     @Override
                     public void onFolderLoaded(List<Folder> folders) {
-                        subscriber.onNext(folders);
-                        subscriber.onCompleted();
+                        emitter.onSuccess(folders);
                     }
                 });
             }
         });
     }
 
-    private static Func1<List<Folder>, List<Album>> toAlbums() {
-        return new Func1<List<Folder>, List<Album>>() {
+    private static Function<List<Folder>, List<Album>> toAlbums() {
+        return new Function<List<Folder>, List<Album>>() {
             @Override
-            public List<Album> call(List<Folder> folders) {
+            public List<Album> apply(@NonNull List<Folder> folders) throws Exception {
                 List<Album> albums = new ArrayList<>();
                 for (Folder folder : folders) {
                     albums.add(new Album(folder));
@@ -128,19 +129,18 @@ public class RxMediaLoader {
         };
     }
 
-    private static Func1<List<Album>, Observable<List<Album>>> photosFunc(
+    private static Function<List<Album>, Single<List<Album>>> photosFunc(
             final Context context, final LoaderManager loaderManager) {
-        return new Func1<List<Album>, Observable<List<Album>>>() {
+        return new Function<List<Album>, Single<List<Album>>>() {
             @Override
-            public Observable<List<Album>> call(final List<Album> albums) {
-                return Observable.create(new Observable.OnSubscribe<List<Album>>() {
+            public Single<List<Album>> apply(@NonNull final List<Album> albums) throws Exception {
+                return Single.create(new SingleOnSubscribe<List<Album>>() {
                     @Override
-                    public void call(final Subscriber<? super List<Album>> subscriber) {
+                    public void subscribe(@NonNull final SingleEmitter<List<Album>> emitter) throws Exception {
                         new PhotoLoader(context, loaderManager, albums, new PhotoLoader.Callback() {
                             @Override
                             public void onPhotoLoaded(List<Album> albums) {
-                                subscriber.onNext(albums);
-                                subscriber.onCompleted();
+                                emitter.onSuccess(albums);
                             }
                         });
                     }
@@ -149,19 +149,18 @@ public class RxMediaLoader {
         };
     }
 
-    private static Func1<List<Album>, Observable<List<Album>>> videosFunc(
+    private static Function<List<Album>, Single<List<Album>>> videosFunc(
             final Context context, final LoaderManager loaderManager) {
-        return new Func1<List<Album>, Observable<List<Album>>>() {
+        return new Function<List<Album>, Single<List<Album>>>() {
             @Override
-            public Observable<List<Album>> call(final List<Album> albums) {
-                return Observable.create(new Observable.OnSubscribe<List<Album>>() {
+            public Single<List<Album>> apply(@NonNull final List<Album> albums) throws Exception {
+                return Single.create(new SingleOnSubscribe<List<Album>>() {
                     @Override
-                    public void call(final Subscriber<? super List<Album>> subscriber) {
+                    public void subscribe(@NonNull final SingleEmitter<List<Album>> emitter) throws Exception {
                         new VideoLoader(context, loaderManager, albums, new VideoLoader.Callback() {
                             @Override
                             public void onVideoLoaded(List<Album> albums) {
-                                subscriber.onNext(albums);
-                                subscriber.onCompleted();
+                                emitter.onSuccess(albums);
                             }
                         });
                     }
