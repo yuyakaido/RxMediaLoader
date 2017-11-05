@@ -39,6 +39,11 @@ public class FolderLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        if (cursor == null) {
+            callback.onFolderLoaded(new ArrayList<Folder>());
+            return;
+        }
+
         int count = cursor.getCount();
         List<Folder> folders = new ArrayList<>(count);
         if (cursor.moveToFirst()) {
