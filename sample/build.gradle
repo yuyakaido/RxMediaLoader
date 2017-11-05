@@ -7,14 +7,14 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.yuyakaido.android.rxmedialoader.sample"
         // Manifest.permission.READ_EXTERNAL_STORAGE requires API 16
         // http://yuki312.blogspot.jp/2012/10/androidjbreadexternalstorage.html
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -32,7 +32,7 @@ android {
 dependencies {
     compile project(':rxmedialoader')
 
-    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.github.bumptech.glide:glide:4.3.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
 
