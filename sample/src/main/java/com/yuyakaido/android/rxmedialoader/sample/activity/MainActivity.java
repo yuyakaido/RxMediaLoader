@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MainActivityPermissionsDispatcher.loadWithCheck(this);
+        MainActivityPermissionsDispatcher.loadWithPermissionCheck(this);
     }
 
     @Override
