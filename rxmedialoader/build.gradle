@@ -36,7 +36,7 @@ dependencies {
 publish {
     groupId = 'com.yuyakaido.android'
     artifactId = 'rx-media-loader'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     uploadName = 'RxMediaLoader'
     website = 'https://github.com/yuyakaido/RxMediaLoader'
 }
