@@ -30,12 +30,13 @@ android {
 }
 
 dependencies {
-    compile project(':rxmedialoader')
+    implementation project(':rxmedialoader')
 
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
 
-    compile 'com.github.hotchemi:permissionsdispatcher:3.0.1'
+    implementation 'com.github.hotchemi:permissionsdispatcher:3.0.1'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
 }
