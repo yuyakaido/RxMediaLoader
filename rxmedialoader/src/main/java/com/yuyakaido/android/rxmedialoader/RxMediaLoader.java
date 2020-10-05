@@ -1,7 +1,7 @@
 package com.yuyakaido.android.rxmedialoader;
 
 import android.content.Context;
-import android.support.v4.app.LoaderManager;
+import androidx.loader.app.LoaderManager;
 
 import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
