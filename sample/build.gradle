@@ -7,14 +7,14 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
     defaultConfig {
         applicationId "com.yuyakaido.android.rxmedialoader.sample"
         // Manifest.permission.READ_EXTERNAL_STORAGE requires API 16
         // http://yuki312.blogspot.jp/2012/10/androidjbreadexternalstorage.html
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
