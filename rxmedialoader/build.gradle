@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.novoda:bintray-release:0.7.0'
+        classpath 'com.novoda:bintray-release:0.9.2'
     }
 }
 
@@ -34,9 +34,11 @@ dependencies {
 }
 
 publish {
+    userOrg = 'yuyakaido'
+    uploadName = 'RxMediaLoader'
     groupId = 'com.yuyakaido.android'
     artifactId = 'rx-media-loader'
     publishVersion = '1.0.5'
-    uploadName = 'RxMediaLoader'
+    desc = 'Load local media with RxJava for Android'
     website = 'https://github.com/yuyakaido/RxMediaLoader'
 }
