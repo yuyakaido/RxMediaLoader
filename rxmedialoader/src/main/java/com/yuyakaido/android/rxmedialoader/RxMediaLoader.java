@@ -5,9 +5,11 @@ import androidx.loader.app.LoaderManager;
 
 import com.yuyakaido.android.rxmedialoader.entity.Album;
 import com.yuyakaido.android.rxmedialoader.entity.Folder;
+import com.yuyakaido.android.rxmedialoader.entity.Media;
 import com.yuyakaido.android.rxmedialoader.error.NeedPermissionException;
 import com.yuyakaido.android.rxmedialoader.loader.FolderLoader;
 import com.yuyakaido.android.rxmedialoader.loader.PhotoLoader;
+import com.yuyakaido.android.rxmedialoader.loader.ScopedPhotoLoader;
 import com.yuyakaido.android.rxmedialoader.loader.VideoLoader;
 import com.yuyakaido.android.rxmedialoader.util.PermissionUtil;
 
@@ -24,6 +26,23 @@ import io.reactivex.functions.Function;
 public class RxMediaLoader {
 
     private RxMediaLoader() {}
+
+    public static Single<List<Media>> scopedMedias(
+            final Context context,
+            final LoaderManager loaderManager
+    ) {
+        return Single.create(new SingleOnSubscribe<List<Media>>() {
+            @Override
+            public void subscribe(final SingleEmitter<List<Media>> emitter) throws Exception {
+                new ScopedPhotoLoader(context, loaderManager, new ScopedPhotoLoader.Callback() {
+                    @Override
+                    public void onPhotoLoaded(List<Media> medias) {
+                        emitter.onSuccess(medias);
+                    }
+                });
+            }
+        });
+    }
 
     public static Single<List<Album>> medias(
             final Context context, final LoaderManager loaderManager) {
