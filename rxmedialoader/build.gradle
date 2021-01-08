@@ -38,7 +38,7 @@ publish {
     uploadName = 'RxMediaLoader'
     groupId = 'com.yuyakaido.android'
     artifactId = 'rx-media-loader'
-    publishVersion = '1.1.0'
+    publishVersion = '1.1.1'
     desc = 'Load local media with RxJava for Android'
     website = 'https://github.com/yuyakaido/RxMediaLoader'
 }
